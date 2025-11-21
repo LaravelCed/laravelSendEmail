@@ -1,0 +1,108 @@
+STEP 1: CREATE NEW LARAVEL 'OPEN TERMINAL' AND THEN COPY PASTE THIS COMMAND
+
+- composer create-project laravel/laravel ProjectName
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+STEP 2: OPEN THE FOLDER OF THE PROJECT YOU BEEN CREATED
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+STEP 3: EDIT ALL NEEDED TO EDIT IN THE '.env' FILE AND NOTE THAT THE 'SESSION = database' IS NEEDED TO UPDATE INTO 'SESSION = file'
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+STEP 4: CREATE A DATABASE MIGRATION BY TYPING THIS INTO THE TERMINAL
+
+- php artisan make:migration create_tableName_table
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+STEP 5: CREATE A MODEL BY TYPING THIS INTO THE TERMINAL
+
+- php artisan make:model TableName
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+STEP 6: CREATE A CONTROLLER BY TYPING THIS INTO THE TERMINAL
+
+- php artisan make:controller ControllerName
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+STEP 7: CREATE A SERVICES BY CREATING A FOLDER NAMED 'Services' AND THEN CREATE A FILE INSIDE ON IT AND HAVE A EXAMPLE CODE OF THIS
+
+<?php
+
+namespace App\Services;
+
+class indexServices {
+   //
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+STEP 8: CREATE A MAIL BY TYPING THIS INTO THE TERMINAL
+
+- php artisan make:mail SampleMail
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+STEP 9: COPY PASTE THIS CODE IN THE CREATED SampleMail in the path of 'app/Mail/SampleMail'
+
+<?php
+
+namespace App\Mail;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
+
+class SendMail extends Mailable
+{
+    use Queueable, SerializesModels;
+
+    public $details;
+
+    public function __construct($details)
+    {
+        $this->details = $details;
+    }
+
+    public function build()
+    {
+        //Note: In the view section of the code, only send the email if the mail class name matches the blade file name.
+
+        //Example:
+        //Mail class: SendMail
+        //Blade view file: send.blade.php
+
+        //If the two correspond, then proceed to send the email.
+        return $this->subject('Test Email')
+                    ->view('mail.send');
+    }
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+STEP 10: CREATE AN EMAIL TEMPLATE BY CREATING A FOLDER NAMED 'mail' IN THE PATH OF 'resources/' AND THEN CREATE A BLADE FILE 'resources/mail/EmailTemplateName.blade.php' HERE IS THE EXAMPLE CODE OF THE EMAIL TEMPLATE
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>{{$details['title']}}</h1>
+    <p>{{$details['body']}}</p>
+</body>
+</html>
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+STEP 11: TO RUN THE APPLICATION COPY PASTE THIS COMMAND IN THE TERMINAL
+
+- php artisan serve
